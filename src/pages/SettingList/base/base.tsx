@@ -27,7 +27,7 @@ interface SettingsState {
 }
 
 class Base extends Component<SettingsProps, SettingsState> {
-  main: HTMLDivElement | undefined = undefined;
+  main: HTMLDivElement | undefined = undefined
 
   constructor(props: SettingsProps) {
     super(props);
@@ -131,10 +131,10 @@ class Base extends Component<SettingsProps, SettingsState> {
   };
 
   render() {
-    const { currentUser } = this.props;
-    if (!currentUser.userid) {
-      return '';
-    }
+    // const { currentUser } = this.props;
+    // if (!currentUser.userid) {
+    //   return '';
+    // }
     const { mode, selectKey } = this.state;
     return (
       <GridContent>

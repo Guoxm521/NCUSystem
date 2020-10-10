@@ -2,26 +2,56 @@
 
 import React, { FC, useState } from 'react'
 
-import { Upload, Modal } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Upload, Image, Space } from 'antd';
+import { PlusOutlined,EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
-
-const intl = useIntl()
+import styles from './uploadView.less'
 
 interface UploadViewProps {
+  id: string
   name: string
   title: string
   onChange?: (file: any) => void
   onPreview?: () => void
 }
 
+interface ShowImageProps {
+  name: string
+  src: string
+  onDelete: () => void
+}
 
-const upLoadButton = (
-  <div>
-    <PlusOutlined />
-    <div>{intl.formatMessage({ id: 'setting.basic.Upload'})}</div>
-  </div>
-)
+// 预览组件
+const ShowImage = function (props: ShowImageProps) {
+  const { name }= props
+  const preview = function () {
+    document.getElementById(name)?.click()
+  }
+
+  const deleteImage = function () {
+    props.onDelete()
+  }
+
+  return (
+    <div className={styles['upload-view-box']}>
+      <div className={styles['upload-view-box-box']}>
+        <Space size={15} className={styles['upload-view-icon-box']}>
+          <a title={"预览图片"} onClick={preview} >
+            <EyeOutlined size={12} />
+          </a>
+          <a title={"删除图片"} >
+            <DeleteOutlined size={12} onClick={deleteImage} />
+          </a>
+        </Space>
+        <Image
+          className={styles['upload-view-image-box']}
+          src={props.src}
+          id={name}
+        />
+      </div>
+    </div>
+  )
+}
 
 // 得到 base64
 const getBase64 = (img: any) => {
@@ -34,55 +64,54 @@ const getBase64 = (img: any) => {
 }
 
 
+// 上传图片组件
 const UploadView: FC<UploadViewProps> = (props: UploadViewProps) => {
 
-  const {name, title, onChange, onPreview} = props
+  const intl = useIntl()
 
-  const [ visible, setVisible ] = useState(false)
-  const [ fileList, setFileList ] = useState([])
+  const upLoadButton = (
+    <div>
+      <PlusOutlined />
+      <div>{intl.formatMessage({ id: 'setting.basic.Upload'})}</div>
+    </div>
+  )
+
+  const {name, onChange} = props
   const [ imgUrl, setImgUrl ] = useState('')
+  const [ showImg, setShowImg ] = useState(false)
 
 
   // upload 的 onChange 事件
-  const handleChange = ({ file, fileList }:any) => {
-    setFileList(fileList)
-    // onChange(file)
-  }
+  const handleChange = async ({ file, fileList }:any) => {
 
-  // upload 的 onPreview 事件
-  const handlePreview = async (file: any) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj)
+    const url:any = await getBase64(file.originFileObj)
+    setImgUrl(url)
+    setShowImg(true)
+    if (onChange) {
+      onChange(file)
     }
-    setImgUrl(file.rul || file.preview)
   }
 
-  // 关闭 modal
-  const handleCancel = () => setVisible(false);
-
-
+  const deleteImage = () => {
+    setShowImg(false)
+  }
 
   return (
     <>
-      <Upload
-        name={name}
-        listType={"picture-card"}
-        accept={"image/jpg, image/jpeg, image/png"}
-        showUploadList={false}
-        fileList={fileList}
-        onChange={handleChange}
-        onPreview={handlePreview}
-      >
-        {fileList.length > 1 ? null : upLoadButton}
-      </Upload>
-      <Modal
-        visible={visible}
-        title={title}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img src={imgUrl} style={{width: '100%'}} />
-      </Modal>
+      <div style={{display: showImg ? 'none' : 'block'}}>
+        <Upload
+          name={name}
+          listType={"picture-card"}
+          accept={"image/jpg, image/jpeg, image/png"}
+          showUploadList={false}
+          onChange={handleChange}
+        >
+          {upLoadButton}
+        </Upload>
+      </div>
+      <div style={{display: showImg ? 'block' : 'none'}}>
+        <ShowImage src={imgUrl} name={props.id} onDelete={deleteImage} />
+      </div>
     </>
   )
 }

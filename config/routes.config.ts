@@ -251,9 +251,14 @@ export default [{
             component: './SettingList/control/control.tsx',
           },
           {
-            path: '/setting/user',
-            name: 'user',
-            component: './SettingList/user/user'
+            path: '/setting/student',
+            name: 'student',
+            component: './SettingList/student/student'
+          },
+          {
+            path: '/setting/worker',
+            name: 'worker',
+            component: './SettingList/worker/worker'
           },
           {
             path: '/setting/authorization',

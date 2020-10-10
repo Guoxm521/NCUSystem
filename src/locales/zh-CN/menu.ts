@@ -61,7 +61,8 @@ export default {
   'menu.setting.department': '部门设置',
   'menu.setting.category': '应用类别管理',
   'menu.setting.control': '应用管理',
-  'menu.setting.user': '用户管理',
+  'menu.setting.student': '学生管理',
+  'menu.setting.worker': '职工管理',
   'menu.setting.authorization': '权限管理',
   'menu.setting.usergroup': '用户组管理',
 

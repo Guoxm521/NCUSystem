@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, Form, Input, Row, Col, Upload, Button, Space } from 'antd';
-import { PlusOutlined } from '@ant-design/icons'
+import { Modal, Form, Input, Row, Col, Button, Space } from 'antd';
+import UploadView from './uploadView'
 
 interface CreateFormProps {
   modalVisible: boolean;
@@ -46,7 +46,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
               <FormItem name='studentId' label="学号">
                 <Input />
               </FormItem>
-              <FormItem name='sex' label="学号">
+              <FormItem name='sex' label="性别">
                 <Input />
               </FormItem>
               <FormItem name='birthPlace' label="籍贯">
@@ -70,30 +70,10 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
             </Col>
             <Col span={8} offset={4}>
               <FormItem name='photo' label="证件照">
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                >
-                  <div>
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>上传照片</div>
-                  </div>
-                </Upload>
+                <UploadView name={"photo"} title={"证件照"} />
               </FormItem>
               <FormItem name='profile' label="头像">
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                >
-                  <div>
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>上传头像</div>
-                  </div>
-                </Upload>
+                <UploadView name={"profile"} title={"头像"} />
               </FormItem>
             </Col>
           </Row>

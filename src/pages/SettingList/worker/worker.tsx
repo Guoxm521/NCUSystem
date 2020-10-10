@@ -7,9 +7,9 @@ import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
-import { TableListItem } from './data.d';
+import { TableListItem } from './data';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import styles from './user.less'
+import styles from './worker.less'
 
 /**
  * 添加节点
@@ -73,66 +73,110 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
   }
 };
 
-const User: React.FC<{}> = () => {
+const Worker: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: '规则名称',
-      dataIndex: 'name',
-      rules: [
-        {
-          required: true,
-          message: '规则名称为必填项',
-        },
-      ],
+      title: '证件照',
+      dataIndex: 'photo',
+      key: 'photo',
+      hideInSearch: true,
+      width: 100,
+      fixed: 'left',
+      render: (text, record)=>{
+        const img = record.photo
+        return (
+          <>
+            <img src={img} alt="" style={{width: '30px', height: '30px', borderRadius: '50%'}} />
+          </>
+        )
+      }
     },
     {
-      title: '描述',
-      dataIndex: 'desc',
-      valueType: 'textarea',
+      title: '工号',
+      dataIndex: 'studentId',
+      width: 120,
+      key: 'studentId',
+      fixed: 'left'
     },
     {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
-      sorter: true,
-      hideInForm: true,
-      renderText: (val: string) => `${val} 万`,
+      title: '姓名',
+      dataIndex: 'userName',
+      width: 80,
+      key: 'userName',
+      fixed: 'left'
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      hideInForm: true,
+      title: '性别',
+      dataIndex: 'sex',
+      hideInSearch: true,
+      width: 100,
+      key: 'sex'
+    },
+    {
+      title: '部门',
+      dataIndex: 'departmentId',
+      hideInSearch: true,
+      key: 'departmentId',
+      width: 200
+    },
+    {
+      title: '民族',
+      dataIndex: 'nation',
+      hideInSearch: true,
+      key: 'nation',
+      width: 150,
       valueEnum: {
-        0: { text: '关闭', status: 'Default' },
-        1: { text: '运行中', status: 'Processing' },
-        2: { text: '已上线', status: 'Success' },
-        3: { text: '异常', status: 'Error' },
+        0: { text: '汉族'},
+        1: { text: '回族'},
+        2: { text: '维吾尔族'},
+        3: { text: '其他'},
       },
     },
     {
-      title: '上次调度时间',
-      dataIndex: 'updatedAt',
-      sorter: true,
-      valueType: 'dateTime',
-      hideInForm: true,
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-        if (`${status}` === '0') {
-          return false;
-        }
-        if (`${status}` === '3') {
-          return <Input {...rest} placeholder="请输入异常原因！" />;
-        }
-        return defaultRender(item);
-      },
+      title: '政治面貌',
+      dataIndex: 'political',
+      hideInSearch: true,
+      key: 'political',
+      width: 150
+    },
+    {
+      title: '籍贯',
+      dataIndex: 'birthPlace',
+      hideInSearch: true,
+      key: 'birthPlace',
+      width: 150
+    },
+    {
+      title: '手机号',
+      dataIndex: 'phone',
+      key: 'phone',
+      width: 150
+    },
+    {
+      title: '头像',
+      dataIndex: 'profile',
+      hideInSearch: true,
+      key: 'profile',
+      width: 100,
+      render: (text, record)=>{
+        const img = record.profile
+        return (
+          <>
+            <img src={img} alt="" style={{width: '30px', height: '30px', borderRadius: '50%'}} />
+          </>
+        )
+      }
     },
     {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      width: 100,
+      fixed: 'right',
       render: (_, record) => (
         <>
           <a
@@ -141,10 +185,10 @@ const User: React.FC<{}> = () => {
               setStepFormValues(record);
             }}
           >
-            配置
+            修改
           </a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <a href="">删除</a>
         </>
       ),
     },
@@ -153,13 +197,14 @@ const User: React.FC<{}> = () => {
   return (
     <div>
       <ProTable<TableListItem>
+        scroll={{x: "1500"}}
         headerTitle="用户列表"
         actionRef={actionRef}
         rowKey="key"
         toolBarRender={(action, { selectedRows }) => [
-          <Button type="primary" onClick={() => handleModalVisible(true)} size={'small'}>
-            <PlusOutlined /> 新增
-          </Button>,
+          // <Button type="primary" onClick={() => handleModalVisible(true)} size={'small'}>
+          //   <PlusOutlined /> 新增
+          // </Button>,
           <Button type="primary" onClick={() => handleModalVisible(true)} size={'small'}>
             <UploadOutlined /> 导入
           </Button>,
@@ -226,4 +271,4 @@ const User: React.FC<{}> = () => {
   );
 };
 
-export default User;
+export default Worker;

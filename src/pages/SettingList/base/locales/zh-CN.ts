@@ -27,7 +27,7 @@ export default {
   'setting.basic.address-message': '请输入您的街道地址!',
   'setting.basic.phone': '联系电话',
   'setting.basic.phone-message': '请输入您的联系电话!',
-  'setting.basic.update': '提交',
+  'setting.basic.update': '保存',
   'setting.basic.update.success': '提交信息成功',
   'setting.security.strong': '强',
   'setting.security.medium': '中',
