@@ -7,27 +7,27 @@ import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
-import { TableListItem } from './data';
+import { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import styles from './worker.less'
+// import styles from './student.less'
 
 /**
  * 添加节点
  * @param fields
  */
-const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading('正在添加');
-  try {
-    await addRule({ ...fields });
-    hide();
-    message.success('添加成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败请重试！');
-    return false;
-  }
-};
+// const handleAdd = async (fields: TableListItem) => {
+//   const hide = message.loading('正在添加');
+//   try {
+//     await addRule({ ...fields });
+//     hide();
+//     message.success('添加成功');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('添加失败请重试！');
+//     return false;
+//   }
+// };
 
 /**
  * 更新节点
@@ -56,24 +56,24 @@ const handleUpdate = async (fields: FormValueType) => {
  *  删除节点
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: TableListItem[]) => {
-  const hide = message.loading('正在删除');
-  if (!selectedRows) return true;
-  try {
-    await removeRule({
-      key: selectedRows.map((row) => row.key),
-    });
-    hide();
-    message.success('删除成功，即将刷新');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('删除失败，请重试');
-    return false;
-  }
-};
+// const handleRemove = async (selectedRows: TableListItem[]) => {
+//   const hide = message.loading('正在删除');
+//   if (!selectedRows) return true;
+//   try {
+//     await removeRule({
+//       key: selectedRows.map((row) => row.key),
+//     });
+//     hide();
+//     message.success('删除成功，即将刷新');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('删除失败，请重试');
+//     return false;
+//   }
+// };
 
-const Worker: React.FC<{}> = () => {
+const Student: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
@@ -96,7 +96,7 @@ const Worker: React.FC<{}> = () => {
       }
     },
     {
-      title: '工号',
+      title: '学号',
       dataIndex: 'studentId',
       width: 120,
       key: 'studentId',
@@ -117,16 +117,36 @@ const Worker: React.FC<{}> = () => {
       key: 'sex'
     },
     {
-      title: '部门',
-      dataIndex: 'departmentId',
+      title: '学院',
+      dataIndex: 'college',
       hideInSearch: true,
-      key: 'departmentId',
-      width: 200
+      key: 'college',
+      width: 200,
+    },
+    {
+      title: '专业',
+      dataIndex: 'specialty',
+      hideInSearch: true,
+      key: 'specialty',
+      width: 150
+    },
+    {
+      title: '年级',
+      dataIndex: 'grade',
+      hideInSearch: true,
+      key: 'grade',
+      width: 150
+    },
+    {
+      title: '班级',
+      dataIndex: 'classId',
+      hideInSearch: true,
+      key: 'classId',
+      width: 150
     },
     {
       title: '民族',
       dataIndex: 'nation',
-      hideInSearch: true,
       key: 'nation',
       width: 150,
       valueEnum: {
@@ -151,9 +171,23 @@ const Worker: React.FC<{}> = () => {
       width: 150
     },
     {
+      title: '身份证号',
+      dataIndex: 'IdCard',
+      hideInSearch: true,
+      key: 'IdCard',
+      width: 150
+    },
+    {
       title: '手机号',
       dataIndex: 'phone',
       key: 'phone',
+      width: 150
+    },
+    {
+      title: 'QQ号',
+      dataIndex: 'qqId',
+      hideInSearch: true,
+      key: 'qqId',
       width: 150
     },
     {
@@ -172,33 +206,25 @@ const Worker: React.FC<{}> = () => {
       }
     },
     {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
+      title: '学生状态',
+      dataIndex: 'status',
+      hideInSearch: true,
+      key: 'status',
       width: 100,
-      fixed: 'right',
-      render: (_, record) => (
-        <>
-          <a
-            onClick={() => {
-              handleUpdateModalVisible(true);
-              setStepFormValues(record);
-            }}
-          >
-            修改
-          </a>
-          <Divider type="vertical" />
-          <a href="">删除</a>
-        </>
-      ),
-    },
+      valueEnum: {
+        0: { text: '毕业', status: 'Default' },
+        1: { text: '休学', status: 'Processing' },
+        2: { text: '在校', status: 'Success' },
+        3: { text: '退学', status: 'Error' },
+      },
+    }
   ];
 
   return (
     <div>
       <ProTable<TableListItem>
         scroll={{x: "1500"}}
-        headerTitle="用户列表"
+        // headerTitle="学生列表"
         actionRef={actionRef}
         rowKey="key"
         toolBarRender={(action, { selectedRows }) => [
@@ -211,28 +237,28 @@ const Worker: React.FC<{}> = () => {
           <Button type="default" onClick={() => handleModalVisible(true)} size={'small'}>
             <DownloadOutlined /> 导出
           </Button>,
-          selectedRows && selectedRows.length > 0 && (
-            <Dropdown
-              overlay={
-                <Menu
-                  onClick={async (e) => {
-                    if (e.key === 'remove') {
-                      await handleRemove(selectedRows);
-                      action.reload();
-                    }
-                  }}
-                  selectedKeys={[]}
-                >
-                  <Menu.Item key="remove">批量删除</Menu.Item>
-                  <Menu.Item key="approval">批量审批</Menu.Item>
-                </Menu>
-              }
-            >
-              <Button size={"small"}>
-                批量操作 <DownOutlined />
-              </Button>
-            </Dropdown>
-          ),
+          // selectedRows && selectedRows.length > 0 && (
+          //   <Dropdown
+          //     overlay={
+          //       <Menu
+          //         onClick={async (e) => {
+          //           if (e.key === 'remove') {
+          //             await handleRemove(selectedRows);
+          //             action.reload();
+          //           }
+          //         }}
+          //         selectedKeys={[]}
+          //       >
+          //         <Menu.Item key="remove">批量删除</Menu.Item>
+          //         <Menu.Item key="approval">批量审批</Menu.Item>
+          //       </Menu>
+          //     }
+          //   >
+          //     <Button size={"small"}>
+          //       批量操作 <DownOutlined />
+          //     </Button>
+          //   </Dropdown>
+          // ),
         ]}
         tableAlertRender={({ selectedRowKeys, selectedRows }) => (
           <div>
@@ -244,7 +270,7 @@ const Worker: React.FC<{}> = () => {
         )}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
-        rowSelection={{}}
+        // rowSelection={{}}
       />
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible} />
       {stepFormValues && Object.keys(stepFormValues).length ? (
@@ -271,4 +297,4 @@ const Worker: React.FC<{}> = () => {
   );
 };
 
-export default Worker;
+export default Student;

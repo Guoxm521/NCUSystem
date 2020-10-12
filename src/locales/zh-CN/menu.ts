@@ -6,7 +6,7 @@ export default {
   'menu.logon.applylist': '申请列表',
   'menu.logon.approval': '登记审批',
 
-  // 信息管理菜单
+  // 社团管理菜单
   'menu.association': '社团管理',
   'menu.association.info': '基本信息',
   'menu.association.news': '社团动态',
@@ -15,6 +15,9 @@ export default {
   'menu.association.upgrade': '社团升级',
   'menu.association.delete': '社团注销',
   'menu.association.party': '党建工作',
+
+  // 社团指导菜单
+  'menu.guide': '社团指导',
 
   // 成员管理菜单
   'menu.member': '成员管理',
@@ -59,11 +62,8 @@ export default {
   'menu.setting': '系统设置',
   'menu.setting.base': '基本设置',
   'menu.setting.department': '部门设置',
-  'menu.setting.category': '应用类别管理',
   'menu.setting.control': '应用管理',
-  'menu.setting.student': '学生管理',
-  'menu.setting.worker': '职工管理',
-  'menu.setting.authorization': '权限管理',
+  'menu.setting.person': '用户管理',
   'menu.setting.usergroup': '用户组管理',
 
   // 'menu.welcome': '欢迎',

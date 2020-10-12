@@ -1,4 +1,4 @@
-// 应用类别页面
+// 应用类别管理组件
 
 import React, { FC, useState } from 'react';
 import { Button, Card, Form } from 'antd';
@@ -99,16 +99,11 @@ const Category: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Card title="类别列表" bordered={false}>
+      <Card  bordered={false}>
         <Form.Item name="members">
           <TableForm />
         </Form.Item>
       </Card>
-      <FooterToolbar>
-        <Button type="primary" onClick={() => form?.submit()} loading={submitting}>
-          提交
-        </Button>
-      </FooterToolbar>
     </Form>
   );
 };

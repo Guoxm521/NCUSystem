@@ -8,6 +8,7 @@ interface CreateFormProps {
 }
 
 const FormItem = Form.Item
+const InputArea = Input.TextArea
 
 const TestList = () => {
   return (
@@ -32,71 +33,24 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   return (
       <Modal
         destroyOnClose
-        title="新增用户"
+        title="用户组"
         visible={modalVisible}
         onCancel={() => onCancel()}
         footer={<TestList />}
       >
-        <Form labelCol={{span: 7}} onFinish={test}>
-          <Row>
-            <Col span={12}>
-              <FormItem name='userName' label="姓名">
-                <Input />
-              </FormItem>
-              <FormItem name='studentId' label="学号">
-                <Input />
-              </FormItem>
-              <FormItem name='sex' label="学号">
-                <Input />
-              </FormItem>
-              <FormItem name='birthPlace' label="籍贯">
-                <Input />
-              </FormItem>
-              <FormItem name='IdCard' label="身份证号">
-                <Input />
-              </FormItem>
-              <FormItem name='departmentId' label="部门号">
-                <Input />
-              </FormItem>
-              <FormItem name='classId' label="班级">
-                <Input />
-              </FormItem>
-              <FormItem name='phone' label="手机号">
-                <Input />
-              </FormItem>
-              <FormItem name='political' label="政治面貌">
-                <Input />
-              </FormItem>
-            </Col>
-            <Col span={8} offset={4}>
-              <FormItem name='photo' label="证件照">
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                >
-                  <div>
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>上传照片</div>
-                  </div>
-                </Upload>
-              </FormItem>
-              <FormItem name='profile' label="头像">
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                >
-                  <div>
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>上传头像</div>
-                  </div>
-                </Upload>
-              </FormItem>
-            </Col>
-          </Row>
+        <Form onFinish={test} layout={"vertical"}>
+          <FormItem
+            name={"name"}
+            label={"用户组名称"}
+          >
+            <Input />
+          </FormItem>
+          <FormItem
+            name={"desc"}
+            label={"描述"}
+          >
+            <InputArea rows={4} maxLength={1000} />
+          </FormItem>
           {/* <Row>
             <Col offset={17}>
               <FormItem>

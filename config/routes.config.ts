@@ -23,11 +23,11 @@ export default [{
             component: './LogonList/apply/apply'
 
           },
-          {
-            path: '/logon/applylist',
-            name: 'applylist',
-            component: './LogonList/applyList/applyList'
-          },
+          // {
+          //   path: '/logon/applylist',
+          //   name: 'applylist',
+          //   component: './LogonList/applyList/applyList'
+          // },
           {
             path: '/logon/approval',
             name: 'approval',
@@ -39,7 +39,7 @@ export default [{
       {
         path: '/association',
         name: 'association',
-        icon: 'InfoCircle',
+        icon: 'Windows',
         component: './AssociationList/index',
         routes: [{
             path: './association/info',
@@ -77,6 +77,13 @@ export default [{
             component: './AssociationList/party/party'
           }
         ]
+      },
+      // 社团指导
+      {
+        path: '/guide',
+        name: 'guide',
+        icon: 'solution',
+        component: './GuideList/index',
       },
       // 成员管理 router  
       {
@@ -241,34 +248,19 @@ export default [{
             component: './SettingList/department/department.tsx',
           },
           {
-            path: '/setting/category',
-            name: 'category',
-            component: './SettingList/category/category.tsx',
-          },
-          {
             path: '/setting/control',
             name: 'control',
             component: './SettingList/control/control.tsx',
           },
           {
-            path: '/setting/student',
-            name: 'student',
-            component: './SettingList/student/student'
-          },
-          {
-            path: '/setting/worker',
-            name: 'worker',
-            component: './SettingList/worker/worker'
-          },
-          {
-            path: '/setting/authorization',
-            name: 'authorization',
-            component: './SettingList/authorization/authorization'
+            path: '/setting/person',
+            name: 'person',
+            component: './SettingList/person/person'
           },
           {
             path: '/setting/usergroup',
             name: 'usergroup',
-            component: './SettingList/userGroup/userGroup.tsx',
+            component: './SettingList/userGroup/usergroup'
           }
         ]
       },

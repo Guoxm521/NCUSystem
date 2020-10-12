@@ -1,5 +1,5 @@
 import { PlusOutlined  } from '@ant-design/icons';
-import { Button, Input, Form, message, Row, Col, Modal } from 'antd';
+import { Button, Input, Form, message, Modal } from 'antd';
 import { connect, FormattedMessage, formatMessage} from 'umi';
 import React, { Component } from 'react';
 
