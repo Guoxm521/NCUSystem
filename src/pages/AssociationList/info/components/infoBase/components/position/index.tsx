@@ -1,47 +1,41 @@
-// 部门设置页面
+// 职务设置 组件
 
-import React, { FC, useState } from 'react';
+import React from 'react'
 import { Button, Card, Form } from 'antd';
 
 import { connect, Dispatch } from 'umi';
 import TableForm from './components/TableForm';
 import FooterToolbar from './components/FooterToolbar';
-import styles from './department.less';
 
 const tableData = [
   {
     key: '1',
-    departmentID: '00001',
-    departmentName: '信息工程学院',
-    departmentType: '学院',
+    positionName: '信息工程学院',
+    positionVIP: '是',
     sort: 1
   },
   {
     key: '2',
-    departmentID: '00002',
-    departmentName: '医学院',
-    departmentType: '学院',
+    positionName: '医学院',
+    positionVIP: '是',
     sort: 2
   },
   {
     key: '3',
-    departmentID: '00003',
-    departmentName: '食品学院',
-    departmentType: '学院',
+    positionName: '食品学院',
+    positionVIP: '是',
     sort: 3
   },
   {
     key: '4',
-    departmentID: '00004',
-    departmentName: '建筑工程学院',
-    departmentType: '学院',
+    positionName: '建筑工程学院',
+    positionVIP: '是',
     sort: 4
   },
   {
     key: '5',
-    departmentID: '00005',
-    departmentName: '通信工程学院',
-    departmentType: '学院',
+    positionName: '通信工程学院',
+    positionVIP: '是',
     sort: 5
   },
 ];
@@ -51,12 +45,12 @@ interface AdvancedFormProps {
   submitting: boolean;
 }
 
-const Department: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
+const Position: React.FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values: { [key: string]: any }) => {
     dispatch({
-      type: 'department/submitAdvancedForm',
+      type: 'PositionModel/submitAdvancedForm',
       payload: values,
     });
   };
@@ -74,7 +68,7 @@ const Department: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Card title="部门列表" bordered={false}>
+      <Card bordered={false}>
         <Form.Item name="members">
           <TableForm />
         </Form.Item>
@@ -89,6 +83,5 @@ const Department: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
 };
 
 export default connect(({ loading }: { loading: { effects: { [key: string]: boolean } } }) => ({
-  submitting: loading.effects['department/submitAdvancedForm'],
-}))(Department);
-
+  submitting: loading.effects['PositionModel/submitAdvancedForm'],
+}))(Position);

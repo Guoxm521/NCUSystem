@@ -197,7 +197,7 @@ const Worker: React.FC<{}> = () => {
   return (
     <div>
       <ProTable<TableListItem>
-        scroll={{x: "1500"}}
+        scroll={{x: "1400"}}
         // headerTitle="教工列表"
         actionRef={actionRef}
         rowKey="key"

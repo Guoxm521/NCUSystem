@@ -7,6 +7,7 @@ import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 
 import CreateForm from './components/CreateForm';
 import ChangeAuthorization, { FormValueType } from './components/ChangeAuthorization';
+import ChangePerson from './components/ChangePerson'
 import { TableListItem } from './data';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import styles from './usergroup.less'
@@ -30,6 +31,7 @@ const handleAdd = async (fields: TableListItem) => {
 };
 
 /**
+ * 
  * 更新节点
  * @param fields
  */
@@ -76,6 +78,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 const UserGroup: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [changePersonVisible, handleChangePersonVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
@@ -126,13 +129,18 @@ const UserGroup: React.FC<{}> = () => {
       fixed: 'right',
       render: (_, record) => (
         <>
-          <a>
+          <a
+            onClick={() => {
+              handleModalVisible(true)
+              setStepFormValues(record)
+            }}
+          >
             编辑
           </a>
           <Divider type="vertical" />
           <a
             onClick={() => {
-              handleUpdateModalVisible(true);
+              handleChangePersonVisible(true);
               setStepFormValues(record);
             }}
           >
@@ -148,7 +156,10 @@ const UserGroup: React.FC<{}> = () => {
             权限配置
           </a>
           <Divider type="vertical" />
-          <a href="">删除</a>
+          <a
+          >
+            删除
+          </a>
         </>
       ),
     },
@@ -168,9 +179,14 @@ const UserGroup: React.FC<{}> = () => {
         ]}
         request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
-        // rowSelection={{}}
       />
+      
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible} />
+      <ChangePerson 
+        onCancel={() => handleChangePersonVisible(false)}
+        updateModalVisible={changePersonVisible}
+        values={stepFormValues}
+      />
       {stepFormValues && Object.keys(stepFormValues).length ? (
         <ChangeAuthorization
           onSubmit={async (value) => {

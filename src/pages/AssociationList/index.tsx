@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { connect } from 'umi';
-import { PageContainer } from '@ant-design/pro-layout';
+// import { PageContainer } from '@ant-design/pro-layout';
 
 const AssociationList: React.FC<{}> = (props) => {
   const { children } = props;
-  return <PageContainer>{children}</PageContainer>;
+  return <>{children}</>;
 };
 
 export default connect()(AssociationList);

@@ -8,7 +8,7 @@ export default {
 
   // 社团管理菜单
   'menu.association': '社团管理',
-  'menu.association.info': '基本信息',
+  'menu.association.info': '社团设置',
   'menu.association.news': '社团动态',
   'menu.association.list': '社团列表',
   'menu.association.member': '社团骨干管理',
@@ -18,6 +18,9 @@ export default {
 
   // 社团指导菜单
   'menu.guide': '社团指导',
+
+  // 社团动态菜单
+  'menu.community': '社团动态',
 
   // 成员管理菜单
   'menu.member': '成员管理',

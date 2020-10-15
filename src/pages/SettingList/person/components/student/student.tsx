@@ -131,6 +131,13 @@ const Student: React.FC<{}> = () => {
       width: 150
     },
     {
+      title: '学制',
+      dataIndex: 'educational',
+      hideInSearch: true,
+      key: 'educational',
+      width: 150
+    },
+    {
       title: '年级',
       dataIndex: 'grade',
       hideInSearch: true,
@@ -142,6 +149,13 @@ const Student: React.FC<{}> = () => {
       dataIndex: 'classId',
       hideInSearch: true,
       key: 'classId',
+      width: 150
+    },
+    {
+      title: '入学时间',
+      dataIndex: 'startTime',
+      hideInSearch: true,
+      key: 'startTime',
       width: 150
     },
     {
@@ -223,7 +237,7 @@ const Student: React.FC<{}> = () => {
   return (
     <div>
       <ProTable<TableListItem>
-        scroll={{x: "1500"}}
+        scroll={{x: "1800"}}
         // headerTitle="学生列表"
         actionRef={actionRef}
         rowKey="key"

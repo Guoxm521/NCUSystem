@@ -1,10 +1,11 @@
-import { PlusOutlined  } from '@ant-design/icons';
+// 基础设置 页面
+
 import { Button, Input, Form, message, Modal } from 'antd';
 import { connect, FormattedMessage, formatMessage} from 'umi';
 import React, { Component } from 'react';
 
 import { CurrentUser } from '../data.d';
-import UploadView from './uploadView'
+import UploadView from '@/components/UploadView/uploadView'
 import styles from './BaseView.less';
 
 interface BaseViewProps {
@@ -13,7 +14,6 @@ interface BaseViewProps {
 
 interface BaseViewState {
   visible: boolean
-  fileList: any
   [name: string]: any
 }
 
@@ -42,17 +42,8 @@ class BaseView extends Component<BaseViewProps, BaseViewState> {
   constructor(props: any) {
     super(props)
     this.state = {
-      visible: false,
-      fileList: [
-        {
-          uid: '-1',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-      ]
+      visible: false
     }
-
   }
 
   getAvatarURL() {

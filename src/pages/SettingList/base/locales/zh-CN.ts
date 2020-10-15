@@ -3,6 +3,7 @@ export default {
   'setting.menuMap.security': '安全设置',
   'setting.menuMap.binding': '账号绑定',
   'setting.menuMap.notification': '新消息通知',
+  'setting.menuMap.department': '部门设置',
   
   'setting.basic.avatar': '头像',
   'setting.basic.change-avatar': '更换头像',

@@ -14,7 +14,7 @@ export interface FormValueType extends Partial<TableListItem> {
 
 export interface UpdateFormProps {
   onCancel: (flag?: boolean, formVals?: FormValueType) => void;
-  onSubmit: (values: FormValueType) => void;
+  // onSubmit: (values: FormValueType) => void;
   updateModalVisible: boolean;
   values: Partial<TableListItem>;
 }
@@ -44,7 +44,7 @@ const ChangePerson: React.FC<UpdateFormProps> = (props) => {
   const [targetKeys, setTargetKeys] = useState([]);
 
   const {
-    onSubmit: handleUpdate,
+    // onSubmit: handleUpdate,
     onCancel: handleUpdateModalVisible,
     updateModalVisible,
   } = props;
@@ -58,7 +58,7 @@ const ChangePerson: React.FC<UpdateFormProps> = (props) => {
       width={1000}
       bodyStyle={{ padding: '32px 40px 48px' }}
       destroyOnClose
-      title="权限配置"
+      title="人员配置"
       visible={updateModalVisible}
       // footer={}
       onCancel={() => handleUpdateModalVisible()}

@@ -10,6 +10,8 @@ import NotificationView from './components/notification';
 import SecurityView from './components/security';
 import styles from './base.less';
 
+import Department from './components/department/department'
+
 const { Item } = Menu;
 
 interface SettingsProps {
@@ -17,7 +19,7 @@ interface SettingsProps {
   currentUser: CurrentUser;
 }
 
-type SettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
+type SettingsStateKeys = 'base' | 'department' | 'security' | 'binding' | 'notification';
 interface SettingsState {
   mode: 'inline' | 'horizontal';
   menuMap: {
@@ -35,12 +37,18 @@ class Base extends Component<SettingsProps, SettingsState> {
       base: (
         <FormattedMessage id="setting.menuMap.basic" defaultMessage="Basic Settings" />
       ),
-      security: (
+      // security: (
+      //   <FormattedMessage
+      //     id="setting.menuMap.security"
+      //     defaultMessage="Security Settings"
+      //   />
+      // ),
+      department: (
         <FormattedMessage
-          id="setting.menuMap.security"
-          defaultMessage="Security Settings"
+          id="setting.menuMap.department"
+          defaultMessage="Department Settings"
         />
-      ),
+      )
       // binding: (
       //   <FormattedMessage
       //     id="accountandsettings.menuMap.binding"
@@ -117,6 +125,8 @@ class Base extends Component<SettingsProps, SettingsState> {
     switch (selectKey) {
       case 'base':
         return <BaseView />;
+      case 'department':
+        return <Department />;
       case 'security':
         return <SecurityView />;
       case 'binding':

@@ -83,9 +83,16 @@ export default [{
         path: '/guide',
         name: 'guide',
         icon: 'solution',
-        component: './GuideList/index',
+        component: './GuideList/index'
       },
-      // 成员管理 router  
+      // 社团动态
+      {
+        path: '/community',
+        name: 'community',
+        icon: 'Fire',
+        component: './CommunityList/index'
+      },
+      // 成员管理 router
       {
         path: '/member',
         name: 'member',
@@ -151,11 +158,13 @@ export default [{
         ]
       },
       // 新媒体管理 router
+      // 已关闭
       {
         path: '/media',
         name: 'media',
         icon: 'VideoCamera',
         component: './MediaList/index',
+        hideInMenu: true,
         routes: [{
             path: '/media/register',
             name: 'register',
@@ -241,11 +250,6 @@ export default [{
             path: '/setting/base',
             name: 'base',
             component: './SettingList/base/base'
-          },
-          {
-            path: '/setting/department',
-            name: 'department',
-            component: './SettingList/department/department.tsx',
           },
           {
             path: '/setting/control',

@@ -9,4 +9,8 @@ const Setting: React.FC<{}> = (props) => {
   return <PageContainer>{children}</PageContainer>;
 };
 
-export default connect()(Setting);
+export default connect((state:any)=>{
+  return {
+    dve: state.user
+  }
+})(Setting);

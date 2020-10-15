@@ -44,7 +44,6 @@ const ChangeAuthorization: React.FC<UpdateFormProps> = (props) => {
   const [targetKeys, setTargetKeys] = useState([]);
 
   const {
-    onSubmit: handleUpdate,
     onCancel: handleUpdateModalVisible,
     updateModalVisible,
   } = props;
